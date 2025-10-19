@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install GNAT and GPRbuild
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gnat-13 gprbuild
+    
+    - name: Build (Debug)
+      run: gprbuild -P spark_crypto_utils.gpr -XBUILD_MODE=debug -j
+    
+    - name: Build (Release)
+      run: gprbuild -P spark_crypto_utils.gpr -XBUILD_MODE=release -j
+    
+    - name: Build Tests
+      run: |
+        cd tests
+        gprbuild -P test_spark_crypto_utils.gpr -j
+    
+    - name: Run Tests
+      run: |
+        cd tests
+        ./obj/test_spark_crypto_utils
+
+  formal-verification:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install GNAT and GNATprove
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gnat-13 gnatprove
+    
+    - name: Run GNATprove
+      run: gnatprove -P spark_crypto_utils.gpr --level=2 --timeout=60 -j
+    
+    - name: Check Proof Results
+      run: |
+        if grep -r "medium\|high" gnatprove/; then
+          echo "GNATprove found unproven checks"
+          exit 1
+        fi

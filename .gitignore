@@ -1,0 +1,31 @@
+# GNAT / Alire
+obj/
+bin/
+lib/
+alire/
+build/
+config/
+
+# Ada compiler artifacts
+*.ali
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# GNATprove
+gnatprove/
+*.spark
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
