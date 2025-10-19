@@ -1,24 +1,13 @@
 name = "spark_crypto_utils"
 version = "1.0.0"
-description = "Cryptographic utility functions: nonce generation, Shamir secret sharing, key wrapping, zeroization"
-licenses = ["Apache-2.0"]
+description = "SPARK Ada cryptographic utilities: nonce generation, Shamir secret sharing, zeroization"
+licenses = "Apache-2.0"
 authors = ["AnubisQuantumCipher <sic.tau@pm.me>"]
 maintainers = ["AnubisQuantumCipher <sic.tau@pm.me>"]
 website = "https://github.com/AnubisQuantumCipher/spark_crypto_utils"
-tags = ["cryptography", "nonce", "secret-sharing", "Shamir", "key-wrapping", "zeroization", "SPARK"]
+tags = ["cryptography", "shamir", "nonce", "spark", "utilities"]
 project-files = ["spark_crypto_utils.gpr"]
 
 long-description = """
-Collection of formally-verifiable cryptographic utilities providing secure random nonce generation, threshold cryptography via Shamir secret sharing, key wrapping, and cryptographic memory zeroization.
-
-Features:
-- Cryptographically secure nonce generation
-- Shamir (k,n) threshold secret sharing
-- Key wrapping with ChaCha20-Poly1305
-- Cryptographic memory zeroization
-- Constant-time operations
-- Self-test framework
+Cryptographic utilities: nonce generation, Shamir (k,n) threshold secret sharing, key wrapping, zeroization.
 """
-
-[[depends-on]]
-# No external dependencies - pure SPARK implementation
